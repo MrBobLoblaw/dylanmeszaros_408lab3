@@ -1,39 +1,56 @@
+
+
 public class Loan {
 
+
+
+    private String loanType;
     private double interestRate;
-    private double amount;
+    private int amount;
 
     public Loan(){
 
-        this.interestRate = 0;
+        this.loanType = "Personal loan";
+        this.interestRate = 4;
         this.amount = 0;
 
     }
 
-    public Loan(double interestRate, double amount){
+    public Loan(String loanType, int amount){
 
-        this.interestRate = interestRate;
+        this.loanType = loanType;
+
+        if (loanType == "House mortgage") { this.interestRate = 1; }
+        else if (loanType == "Car loan") { this.interestRate = 3; }
+        else { this.interestRate = 4; } // Personal loan
+
         this.amount = amount;
 
     }
 
-    public double getInterestRate() {return interestRate;}
+    public double getInterestRate() { return this.interestRate; }
 
-    public double getAmount() {return amount;}
+    public int getAmount() {return this.amount;}
 
-    public void setInterestRate(double interestRate) {
+    public String getLoanType() {return this.loanType;}
 
-        if (interestRate < 0) {
+    public void setLoanType(String loanType) {
 
-            throw new IllegalArgumentException("Interest must be greater than or equal 0");
+        if (loanType != "House mortgage" && loanType != "Car loan" && loanType != "Personal loan") {
+
+            throw new IllegalArgumentException("loanType must be 'House mortgage', 'Car loan', or 'Personal loan'");
 
         }
 
-        this.interestRate = interestRate;
+        if (loanType == "House mortgage") { this.interestRate = 1; }
+        else if (loanType == "Car loan") { this.interestRate = 3; }
+        else { this.interestRate = 4; } // Personal loan
+
+        this.loanType = loanType;
 
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(int amount) {
 
         if (amount <= 0 || amount > 300000) {
 
@@ -45,110 +62,14 @@ public class Loan {
 
     }
 
-}
-
-//Fig. 9.10: CommissionEmployee.java
-
-// CommissionEmployee class uses methods to manipulate its
-
-// private instance variables.
-
-public class CommissionEmployee {
-
-    private final String firstName;
-    private final String lastName;
-    private final String socialSecurityNumber;
-    private double grossSales; // gross weekly sales
-    private double commissionRate; // commission percentage
 
 
-
-    // five-argument constructor
-    public CommissionEmployee(String firstName, String lastName, String socialSecurityNumber, double grossSales, double commissionRate) {
-        // implicit call to Object constructor occurs here
-
-        // if grossSales is invalid throw exception
-        if (grossSales < 0.0) {
-
-            throw new IllegalArgumentException("Gross sales must be >= 0.0");
-
-        }
-
-        // if commissionRate is invalid throw exception
-        if (commissionRate <= 0.0 || commissionRate >= 1.0) {
-
-            throw new IllegalArgumentException("Commission rate must be > 0.0 and < 1.0");
-
-        }
-
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.socialSecurityNumber = socialSecurityNumber;
-        this.grossSales = grossSales;
-        this.commissionRate = commissionRate;
-
-    }
-
-
-    // return first name
-    public String getFirstName() {return firstName;}
-
-    // return last name
-    public String getLastName() {return lastName;}
-
-    // return social security number
-    public String getSocialSecurityNumber() {return socialSecurityNumber;}
-
-    // set gross sales amount
-    public void setGrossSales(double grossSales) {
-
-        if (grossSales < 0.0) {
-
-            throw new IllegalArgumentException("Gross sales must be >= 0.0");
-
-        }
-
-        this.grossSales = grossSales;
-
-    }
-
-
-
-    // return gross sales amount
-    public double getGrossSales() {return grossSales;}
-
-    // set commission rate
-    public void setCommissionRate(double commissionRate) {
-
-        if (commissionRate <= 0.0 || commissionRate >= 1.0) {
-
-            throw new IllegalArgumentException("Commission rate must be > 0.0 and < 1.0");
-
-        }
-
-        this.commissionRate = commissionRate;
-
-    }
-
-
-
-    // return commission rate
-    public double getCommissionRate() {return commissionRate;}
-
-    // calculate earnings
-    public double earnings() {
-
-        return getCommissionRate() * getGrossSales();
-
-    }
-
-    // return String representation of CommissionEmployee object
+    // return String representation of Loan object
     @Override
 
     public String toString() {
 
-        return String.format("%s: %s %s%n%s: %s%n%s: %.2f%n%s: %.2f", "commission employee", getFirstName(), getLastName(),
-        "social security number", getSocialSecurityNumber(), "gross sales", getGrossSales(), "commission rate", getCommissionRate());
+        return String.format("Loan type: {0}, Interest rate: {1}, Amount: {2}", this.loanType, this.interestRate, this.amount);
 
     }
 
