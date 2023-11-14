@@ -7,7 +7,14 @@ public class Main {
 
     public static void main(String[] args) {
 
+        //List<? extends Loan> listOfLoans = new ArrayList<>();
+
         boolean appExit = false;
+
+        final int ONE = 1;
+        final int TWO = 2;
+        final int THREE = 3;
+        final int FOUR = 4;
 
         Scanner scanner = new Scanner(System.in);
 
@@ -18,7 +25,7 @@ public class Main {
 
             switch (option1){
 
-                case 1:
+                case ONE:
                     // Disburse
                     boolean optExit = false;
 
@@ -33,23 +40,56 @@ public class Main {
 
                         switch (option2){
 
-                            case 1:
+                            case ONE:
                                 // House mortgage
-                                createLoan("House mortgage");
+                                HouseMortgage newLoan = new HouseMortgage();
+
+                                System.out.println(MessageFormat.format("Starting a new {0}. Current interest rate {1}%",
+                                        newLoan.getLoanType(), newLoan.getInterestRate()));
+                                System.out.print("Enter the amount of the loan: ");
+
+                                int amount = scanner.nextInt();
+                                newLoan.setAmount(amount);
+
+                                listOfLoans.add(newLoan);
+
+                                System.out.println("Loan disbursed\n\n");
 
                                 optExit = true;
 
                                 break;
-                            case 2:
+                            case TWO:
                                 // Car loan
-                                createLoan("Car loan");
+                                CarLoan newLoan2 = new CarLoan();
+
+                                System.out.println(MessageFormat.format("Starting a new {0}. Current interest rate {1}%",
+                                        newLoan2.getLoanType(), newLoan2.getInterestRate()));
+                                System.out.print("Enter the amount of the loan: ");
+
+                                int amount2 = scanner.nextInt();
+                                newLoan2.setAmount(amount2);
+
+                                listOfLoans.add(newLoan2);
+
+                                System.out.println("Loan disbursed\n\n");
 
                                 optExit = true;
 
                                 break;
-                            case 3:
+                            case THREE:
                                 // Personal loan
-                                createLoan("Personal loan");
+                                PersonalLoan newLoan3 = new PersonalLoan();
+
+                                System.out.println(MessageFormat.format("Starting a new {0}. Current interest rate {1}%",
+                                        newLoan3.getLoanType(), newLoan3.getInterestRate()));
+                                System.out.print("Enter the amount of the loan: ");
+
+                                int amount3 = scanner.nextInt();
+                                newLoan3.setAmount(amount3);
+
+                                listOfLoans.add(newLoan3);
+
+                                System.out.println("Loan disbursed\n\n");
 
                                 optExit = true;
 
@@ -65,11 +105,11 @@ public class Main {
 
 
                     break;
-                case 2:
+                case TWO:
                     // Show List
 
                     System.out.format( "\n%-14s  %-6s  %-6s", "Type", "Amount", "Amount owed" );
-                    if (listOfLoans.size() > 0) {
+                    if (!listOfLoans.isEmpty()) {
 
                         for (Loan loan : listOfLoans){
 
@@ -90,12 +130,12 @@ public class Main {
                     System.out.print("\n\n");
 
                     break;
-                case 3:
+                case THREE:
                     // Show Sum
 
                     System.out.format( "\n%-6s   %-6s", "Amount", "Amount owed" );
 
-                    if (listOfLoans.size() > 0) {
+                    if (!listOfLoans.isEmpty()) {
 
                         int amount = 0;
                         int amountOwed = 0;
@@ -119,7 +159,7 @@ public class Main {
                     System.out.print("\n\n");
 
                     break;
-                case 4:
+                case FOUR:
                     // Exit
                     appExit = true;
                     break;
@@ -130,23 +170,6 @@ public class Main {
             }
 
         } while (!appExit);
-
-    }
-
-    public static void createLoan(String loanType){
-
-        Scanner scanner = new Scanner(System.in);
-
-        Loan newLoan = new Loan(loanType, 0);
-        System.out.println(MessageFormat.format("Starting a new {0}. Current interest rate {1}%", loanType, newLoan.getInterestRate()));
-        System.out.print(String.format("Enter the amount of the loan: "));
-        int amount = scanner.nextInt();
-
-        newLoan.setAmount(amount);
-
-        listOfLoans.add(newLoan);
-
-        System.out.println("Loan disbursed\n\n");
 
     }
 
