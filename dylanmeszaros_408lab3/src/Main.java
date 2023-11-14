@@ -3,11 +3,11 @@ import java.util.*;
 
 public class Main {
 
-    public static List<Loan> listOfLoans = new ArrayList<Loan>();
+    //public static List<Loan> listOfLoans = new ArrayList<Loan>();
 
     public static void main(String[] args) {
 
-        //List<? extends Loan> listOfLoans = new ArrayList<>();
+        List<Loan> listOfLoans = new ArrayList<Loan>();
 
         boolean appExit = false;
 
